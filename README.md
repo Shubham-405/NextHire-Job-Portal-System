@@ -74,9 +74,8 @@ NextHire integrates an **AI-powered chatbot** using **Google Gemini REST API** t
 
 | Page                  | Preview |
 |------------------------|---------|
-| 🏠 Index Page          | (![Index Page](https://github.com/user-attachments/assets/e0bea575-f328-4678-b18b-0f91ae4e9c66)
-) |
-| 🔐 Login Page          | ![Login](screenshots/login.png) |
+| 🏠 Index Page          | ![Index Page](https://github.com/user-attachments/assets/e0bea575-f328-4678-b18b-0f91ae4e9c66) |
+| 🔐 Login Page          | ![Login](https://github.com/user-attachments/assets/c3948cf4-c9ce-4b57-895c-0e3cdff3e9f6) |
 | 📝 Candidate Registration | ![Candidate Registration](screenshots/candidate_register.png) |
 | 📝 Company Registration   | ![Company Registration](screenshots/company_register.png) |
 | 🛡 Admin Dashboard     | ![Admin Dashboard](screenshots/admin_dashboard.png) |
