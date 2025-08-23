@@ -85,9 +85,54 @@ NextHire integrates an **AI-powered chatbot** using **Google Gemini REST API** t
 
 ---
 
-⚡ Installation & Setup
-
 1. **Clone the repository**
    ```bash
    git clone https://github.com/Shubham-405/NextHire-Job-Portal-System.git
    cd NextHire-Job-Portal-System
+
+
+**2. Create Virtual Environment**
+
+python -m venv venv
+source venv/bin/activate   # On Linux/Mac
+venv\Scripts\activate      # On Windows
+
+
+**3. Install Dependencies**
+
+pip install -r requirements.txt
+
+
+**4. Run Migrations**
+
+python manage.py makemigrations
+python manage.py migrate
+
+
+**5. Start the Server**
+
+python manage.py runserver
+
+
+**6. Open your browser at http://127.0.0.1:8000/**
+ 🚀
+⚡ Installation & Setup
+
+**👨‍💻 Author**
+
+**Shubham Bobade**
+**📧 Email: shubhambobade369@gmail.com**
+
+**🌐 GitHub: Shubham-405**
+
+💼 Aspiring Full Stack Python Developer
+
+**This project demonstrates:**
+**✅ Full Stack Python Development (Django + Frontend + REST APIs)**
+**✅ Secure Authentication with JWT**
+**✅ User Registration Flows (Candidate & Company)**
+**✅ AI Integration (Gemini Career Assistant Chatbot)**
+**✅ Modular Architecture (Admin, Company, Candidate)**
+**✅ Interactive Dashboards with Bootstrap 5 & jQuery DataTables**
+
+**If you’re looking for a Full Stack Python Developer who can build secure, scalable, and AI-powered web applications, I’d love to connect! 🚀**
