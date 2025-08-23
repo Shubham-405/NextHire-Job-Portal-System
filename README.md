@@ -76,11 +76,11 @@ NextHire integrates an **AI-powered chatbot** using **Google Gemini REST API** t
 |------------------------|---------|
 | 🏠 Index Page          | ![Index Page](https://github.com/user-attachments/assets/e0bea575-f328-4678-b18b-0f91ae4e9c66) |
 | 🔐 Login Page          | ![Login](https://github.com/user-attachments/assets/c3948cf4-c9ce-4b57-895c-0e3cdff3e9f6) |
-| 📝 Candidate Registration | ![Candidate Registration](screenshots/candidate_register.png) |
-| 📝 Company Registration   | ![Company Registration](screenshots/company_register.png) |
+| 📝 Candidate Registration | ![Candidate Registration](https://github.com/user-attachments/assets/bd9ee825-7cf1-4ab4-89ba-cb6fc9c0f1ad) |
+| 📝 Company Registration   | ![Company Registration](https://github.com/user-attachments/assets/befb867c-f6f7-4156-b4ce-ccfaeea1a3f7) |
 | 🛡 Admin Dashboard     | ![Admin Dashboard](https://github.com/user-attachments/assets/1a14d7bf-0108-44a6-9b76-22c7315499c7) |
 | 🏢 Company Dashboard   | ![Company Dashboard](https://github.com/user-attachments/assets/f0cbd3bf-098e-40b9-87aa-4adb8ec7bd77) |
-| 👨‍🎓 Candidate Dashboard  | ![Candidate Dashboard](https://github.com/user-attachments/assets/45c150ba-0646-44b9-919e-ae89b00ed718) |
+| 👨‍🎓 Candidate Dashboard  | ![Candidate Dashboard](https://github.com/user-attachments/assets/b23c1e88-e223-4c3c-b58b-bc077938ff34) |
 
 
 ---
