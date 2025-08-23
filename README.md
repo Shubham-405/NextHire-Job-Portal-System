@@ -78,11 +78,10 @@ NextHire integrates an **AI-powered chatbot** using **Google Gemini REST API** t
 | 🔐 Login Page          | ![Login](https://github.com/user-attachments/assets/c3948cf4-c9ce-4b57-895c-0e3cdff3e9f6) |
 | 📝 Candidate Registration | ![Candidate Registration](screenshots/candidate_register.png) |
 | 📝 Company Registration   | ![Company Registration](screenshots/company_register.png) |
-| 🛡 Admin Dashboard     | ![Admin Dashboard](screenshots/admin_dashboard.png) |
-| 🏢 Company Dashboard   | ![Company Dashboard](screenshots/company_dashboard.png) |
-| 👨‍🎓 Candidate Dashboard  | ![Candidate Dashboard](screenshots/candidate_dashboard.png) |
+| 🛡 Admin Dashboard     | ![Admin Dashboard](https://github.com/user-attachments/assets/1a14d7bf-0108-44a6-9b76-22c7315499c7) |
+| 🏢 Company Dashboard   | ![Company Dashboard](https://github.com/user-attachments/assets/f0cbd3bf-098e-40b9-87aa-4adb8ec7bd77) |
+| 👨‍🎓 Candidate Dashboard  | ![Candidate Dashboard](https://github.com/user-attachments/assets/45c150ba-0646-44b9-919e-ae89b00ed718) |
 
-*(Upload screenshots in a folder named `screenshots/` inside your repo and update file names if needed.)*
 
 ---
 
