@@ -1,0 +1,198 @@
+{% extends 'app/candidate_dashboard_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-2 mb-5">
+  <!-- Profile Image in Center -->
+
+  <!-- Glass Form -->
+  <div class="glass-box p-5 rounded-4 shadow-lg mx-auto" style="max-width: 1300px;">
+   {% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+      <div class="alert alert-dismissible fade show custom-alert" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+  <div class="text-center mb-4">
+      <!-- Profile Image in Center -->
+    {% if candidate.profile_pic %}
+      <img src="{{ candidate.profile_pic.url }}" class="rounded-circle" width="150" height="150" style="object-fit: cover; border: 4px solid #ffffff;">
+    {% else %}
+      <img src="{% static 'app/default-profile.png' %}" class="rounded-circle" width="150" height="150" style="object-fit: cover; border: 4px solid #ffffff;">
+    {% endif %}
+    <h4 class="mt-3 text-black">{{ candidate.firstname }} {{ candidate.lastname }}</h4>
+  </div>
+
+
+    <h2 class="mb-4 text-center fw-bold text-dark"><i class="fas fa-user-edit me-2"></i>Update Profile</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="firstname" class="form-label text-dark "><i class="fas fa-user me-1"></i>First Name</label>
+          <input type="text" name="firstname" id="firstname" class="form-control rounded-5" value="{{ candidate.firstname }}">
+        </div>
+        <div class="col-md-6">
+          <label for="lastname" class="form-label text-dark"><i class="fas fa-user me-1"></i>Last Name</label>
+          <input type="text" name="lastname" id="lastname" class="form-control rounded-5" value="{{ candidate.lastname }}">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="contact" class="form-label text-dark"><i class="fas fa-phone me-1"></i>Contact</label>
+          <input type="text" name="contact" id="contact" class="form-control rounded-5" value="{{ candidate.contact }}">
+        </div>
+        <div class="col-md-6">
+          <label for="dob" class="form-label text-dark"><i class="fas fa-calendar-alt me-1"></i>Date of Birth</label>
+          <input type="date" name="dob" id="dob" class="form-control rounded-5" value="{{ candidate.dob }}">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="state" class="form-label text-dark"><i class="fas fa-flag me-1"></i>State</label>
+          <input type="text" name="state" id="state" class="form-control rounded-5" value="{{ candidate.state }}">
+        </div>
+        <div class="col-md-6">
+          <label for="city" class="form-label text-dark"><i class="fas fa-city me-1"></i>City</label>
+          <input type="text" name="city" id="city" class="form-control rounded-5" value="{{ candidate.city }}">
+        </div>
+      </div>
+      <div class="row mb-3">
+  <div class="col-md-6">
+    <label for="job_role" class="form-label text-dark"><i class="fas fa-briefcase me-1"></i>Job Role</label>
+    <input type="text" name="job_role" id="job_role" class="form-control rounded-5" value="{{ candidate.job_role|default_if_none:'' }}">
+  </div>
+  <div class="col-md-6">
+    <label for="experience" class="form-label text-dark"><i class="fas fa-user-clock me-1"></i>Experience (in years)</label>
+    <input type="number" name="experience" id="experience" class="form-control rounded-5" value="{{ candidate.experience|default_if_none:'' }}">
+  </div>
+</div>
+
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <label for="salary_expectation" class="form-label text-dark"><i class="fas fa-rupee-sign me-1"></i>Expected Salary (LPA)</label>
+    <input type="text" name="salary_expectation" id="salary_expectation " class="form-control rounded-5" value="{{ candidate.salary_expectation|default_if_none:'' }}">
+  </div>
+  <div class="col-md-6">
+    <label for="current_company" class="form-label text-dark"><i class="fas fa-building me-1"></i>Current Company</label>
+    <input type="text" name="current_company" id="current_company rounded-5" class="form-control rounded-5" value="{{ candidate.current_company|default_if_none:'' }}">
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <label for="skills" class="form-label text-dark"><i class="fas fa-code me-1"></i>Skills</label>
+    <input type="text" name="skills" id="skills" class="form-control rounded-5" value="{{ candidate.skills|default_if_none:'' }}">
+    <small class="form-text text-muted">E.g. Python, Flask, MySQL, JavaScript</small>
+  </div>
+  <div class="col-md-6">
+    <label for="linkedin" class="form-label text-dark"><i class="fab fa-linkedin me-1"></i>LinkedIn Profile</label>
+    <input type="url" name="linkedin" id="linkedin" class="form-control rounded-5" value="{{ candidate.linkedin|default_if_none:'' }}">
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <label for="github" class="form-label text-dark"><i class="fab fa-github me-1"></i>GitHub Profile</label>
+    <input type="url" name="github" id="github" class="form-control rounded-5" value="{{ candidate.github|default_if_none:'' }}">
+  </div>
+  <div class="col-md-6">
+    <label for="portfolio" class="form-label text-dark"><i class="fas fa-globe me-1"></i>Portfolio Website</label>
+    <input type="url" name="portfolio" id="portfolio" class="form-control rounded-5" value="{{ candidate.portfolio|default_if_none:'' }}">
+  </div>
+</div>
+
+<div class="mb-3">
+  <label for="bio" class="form-label text-dark"><i class="fas fa-align-left me-1"></i>Professional Summary / Bio</label>
+  <textarea name="bio" id="bio" class="form-control rounded-5" rows="4" placeholder="Describe your experience, goals, and expertise...">{{ candidate.bio|default_if_none:'' }}</textarea>
+</div>
+
+      <div class="mb-3">
+        <label for="address" class="form-label text-dark"><i class="fas fa-map-marker-alt me-1"></i>Address</label>
+        <textarea name="address" id="address" class="form-control rounded-5" rows="2">{{ candidate.address }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="gender" class="form-label text-dark"><i class="fas fa-venus-mars me-1"></i>Gender</label>
+        <select name="gender" id="gender" class="form-select">
+          <option value="Male" {% if candidate.gender == "Male" %}selected{% endif %}>Male</option>
+          <option value="Female" {% if candidate.gender == "Female" %}selected{% endif %}>Female</option>
+          <option value="Other" {% if candidate.gender == "Other" %}selected{% endif %}>Other</option>
+        </select>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="profile_pic" class="form-label text-dark"><i class="fas fa-image me-1"></i>Upload Profile Picture</label>
+          <input type="file" name="profile_pic" id="profile_pic" class="form-control">
+          {% if candidate.profile_pic %}
+            <img src="{{ candidate.profile_pic.url }}" alt="Profile" class="img-thumbnail mt-2" width="120">
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          <label for="resume" class="form-label text-dark"><i class="fas fa-file-pdf me-1"></i>Upload Resume (PDF)</label>
+          <input type="file" name="resume" id="resume" class="form-control ">
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary px-5 rounded-5"><i class="fas fa-save me-2"></i>Update</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Styles -->
+<style>
+  .glass-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .form-control, .form-select {
+    background-color: rgba(255, 255, 255, 0.6);
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  .form-control:focus, .form-select:focus {
+    box-shadow: 0 0 10px #007bff;
+    border-color: #007bff;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;
+  }
+
+  label {
+    font-weight: 500;
+  }
+  
+  .custom-alert {
+    background-color: rgba(30, 30, 30, 0.85); /* dark background */
+    color: #f1f1f1;                           /* light text */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    padding: 15px 20px;
+    font-size: 16px;
+  }
+
+  .btn-close-white {
+    filter: brightness(0) invert(1); /* makes close button white */
+  }
+
+
+</style>
+{% endblock %}
+

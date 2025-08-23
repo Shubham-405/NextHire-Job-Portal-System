@@ -1,0 +1,106 @@
+{% extends 'app/company_dashboard_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div style="padding: 30px;">
+    <h1 style="font-size: 28px; font-weight: bold; margin-bottom: 20px; text-align: center; color: black;">
+        📋 Job Listings
+    </h1>
+
+    <!-- Box container -->
+    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+
+        <table id="jobTable" class="display nowrap" style="width:100%; color: black;">
+            <thead>
+                <tr>
+                    
+                    <th>Job Title</th>
+                    <th>Company Name</th>
+                    <th>Qualification</th>
+                    <th>Experience</th>
+                    <th>Location</th>
+                    <th>Salary</th>
+                    <th>Posted On</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                <tr>
+                    <td>{{ job.job_title }}</td>
+                    <td>{{ job.company.company_name }}</td>
+                    <td>{{ job.qualifications }}</td>
+                    <td>{{ job.experience_required }}</td>
+                    <td>{{ job.location }}</td>
+                    <td>{{ job.salary_package }}</td>
+                    
+                    <td>{{ job.created_at|date:"M d, Y" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
+<style>
+    table.dataTable {
+        border-collapse: separate;
+        border-spacing: 0 8px;
+    }
+    table.dataTable thead th {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 2px solid #ddd;
+        background: #f9f9f9;
+    }
+    table.dataTable tbody td {
+        padding: 10px;
+    }
+    table.dataTable tbody tr {
+        background: #ffffff;
+        border: 1px solid #e6e6e6;
+    }
+    table.dataTable tbody tr:hover {
+        background: #f2f2f2;
+        cursor: pointer;
+    }
+    .dataTables_wrapper .dataTables_filter {
+        margin-bottom: 15px;
+    }
+    .dataTables_wrapper .dataTables_filter input {
+        padding: 8px 12px;
+        margin-left: 8px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        color: black;
+    }
+</style>
+
+<!-- jQuery & DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#jobTable').DataTable({
+        responsive: true,
+        pageLength: 5,
+        lengthMenu: [5, 10, 25, 50],
+        order: [[ 5, 'desc' ]],
+        language: {
+            search: "🔍 Search:",
+            lengthMenu: "Show _MENU_ jobs per page",
+            info: "Showing _START_ to _END_ of _TOTAL_ jobs"
+        }
+    });
+});
+</script>
+
+{% endblock %}

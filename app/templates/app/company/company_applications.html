@@ -1,0 +1,162 @@
+{% extends 'app/company_dashboard_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0" style="color:#111;">View Applications</h3>
+    <span class="badge bg-dark fs-6">Total: {{ applications|length }}</span>
+  </div>
+
+  <!-- Card -->
+  <div class="card border-0 shadow-sm" style="border-radius:14px;">
+    <div class="card-body">
+
+      <!-- Table -->
+      <table id="applicationsTable" class="display nowrap" style="width:100%; background:#fff; color:#111;">
+        <thead>
+          <tr>
+            <th>Candidate</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Experience</th>
+            <th>Job Title</th>
+            <th>Applied On</th>
+            <th>Status</th>
+            <th>Resume</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for app in applications %}
+          <tr>
+            <td>
+              <strong>{{ app.candidate.firstname }} {{ app.candidate.lastname }}</strong>
+              {% if app.candidate.city or app.candidate.state %}
+                <div class="small text-muted">{{ app.candidate.city }}{% if app.candidate.city and app.candidate.state %}, {% endif %}{{ app.candidate.state }}</div>
+              {% endif %}
+            </td>
+
+            <td>{{ app.candidate.user_id.email }}</td>
+            <td>{{ app.candidate.contact|default:"—" }}</td>
+            <td>{{ app.experience|default:app.candidate.experience|default:"—" }}</td>
+            <td>{{ app.job.job_title }}</td>
+            <td>{{ app.applied_at|date:"M d, Y H:i" }}</td>
+
+            <td>
+  <span style="
+    font-weight: bold;
+    {% if app.status == 'Accepted' %}
+      color: green;
+    {% elif app.status == 'Rejected' %}
+      color: red;
+    {% elif app.status == 'In Process' %}
+      color: orange;
+    {% elif app.status == 'Viewed' %}
+      color: blue;
+    {% else %}
+      color: gray;
+    {% endif %}
+  ">
+    {{ app.status }}
+  </span>
+</td>
+
+
+
+
+            <td>
+              {% if app.resume %}
+                <a href="{{ app.resume.url }}" target="_blank" class="text-primary text-decoration-none">
+                  <i class="fa-solid fa-file-arrow-down me-1"></i>View
+                </a>
+              {% elif app.candidate.resume %}
+                <a href="{{ app.candidate.resume.url }}" target="_blank" class="text-primary text-decoration-none">
+                  <i class="fa-solid fa-file-arrow-down me-1"></i>View
+                </a>
+              {% else %}
+                <span class="text-muted">N/A</span>
+              {% endif %}
+            </td>
+
+            <td>
+              <button
+                class="btn btn-outline-dark btn-sm px-2 py-1 view-app-btn"
+                data-url="{% url 'application_details' app.id %}"
+                style="border-radius:8px;"
+                title="View application">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal (placed OUTSIDE loop) -->
+<div class="modal fade" id="applicationModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content" style="border-radius:14px;">
+      <div class="modal-header">
+        <h5 class="modal-title">Application Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="applicationModalBody">
+        <div class="text-center text-muted py-4">Loading…</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
+<!-- jQuery & DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // DataTable initialization
+    $('#applicationsTable').DataTable({
+        responsive: true,
+        dom: 'Bfrtip',
+        buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+    });
+
+    // View application button click
+    $(document).on('click', '.view-app-btn', function () {
+        let url = $(this).data('url');
+        $("#applicationModalBody").html('<div class="text-center text-muted py-4">Loading…</div>');
+        
+        $.get(url, function (data) {
+            $("#applicationModalBody").html(data);
+
+            // ✅ Bootstrap 5 way to show modal
+            let modal = new bootstrap.Modal(document.getElementById('applicationModal'));
+            modal.show();
+        }).fail(function () {
+            $("#applicationModalBody").html('<div class="text-danger text-center py-4">Unable to load application. Please try again.</div>');
+        });
+    });
+});
+
+</script>
+
+{% endblock %}

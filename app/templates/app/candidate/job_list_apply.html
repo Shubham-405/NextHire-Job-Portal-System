@@ -1,0 +1,84 @@
+{% extends 'app/candidate_dashboard_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid my-4">
+    <div class="row">
+        <!-- Left: Job List -->
+        <div class="col-md-4 job-list p-3" style="border-right: 1px solid #ddd; height: 80vh; overflow-y: auto;">
+            <h5 class="fw-bold mb-3"><i class="fas fa-briefcase me-2 text-primary"></i> Job Openings</h5>
+
+            {% for job in jobs %}
+            <div class="job-item p-3 mb-3 rounded shadow-sm d-flex align-items-start" 
+                 style="cursor: pointer; background: white;"
+                 onclick="showJobDetails({{ job.id }})">
+
+                <div class="me-3 text-primary" style="font-size: 1.8rem;">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold text-primary mb-1"><i class="fas fa-briefcase me-1"></i>{{ job.job_title }}</h6>
+                    <p class="mb-1 text-muted"><i class="fas fa-industry me-1"></i>{{ job.company.company_name }}</p>
+                    <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>{{ job.location }}</small>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Right: Job Details -->
+        <div class="col-md-8 p-4" id="job-details" style="height: 80vh; overflow-y: auto;">
+            <div class="text-center text-muted" style="margin-top: 10%;">
+                <i class="fas fa-hand-pointer fa-3x mb-3 text-primary"></i>
+                <h5>Select a job to view details</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS to Load Job Details -->
+<script>
+function showJobDetails(jobId) {
+    $.ajax({
+        url: "/candidate/job-details/" + jobId + "/",
+        method: "GET",
+        success: function(data) {
+            $("#job-details").html(data);
+        },
+        error: function() {
+            alert("Error loading job details.");
+        }
+    });
+}
+</script>
+
+<style>
+.job-item {
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+.job-item:hover {
+    background: rgba(0, 123, 255, 0.08);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3 !important;
+    border-color: #004085 !important;
+    transform: scale(1.05);
+}
+
+.apply-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+</style>
+{% endblock %}

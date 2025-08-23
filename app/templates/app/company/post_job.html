@@ -1,0 +1,154 @@
+
+{% extends 'app/company_dashboard_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-2 mb-5">
+  <!-- Profile Image in Center -->
+
+  <!-- Glass Form -->
+  <div class="glass-box p-5 rounded-4 shadow-lg mx-auto" style="max-width: 1300px;">
+   {% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+      <div class="alert alert-dismissible fade show custom-alert" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+  <div class="text-center mb-4">
+      <!-- Profile Image in Center -->
+    {% if company.company_logo %}
+      <img src="{{ company.company_logo.url }}" class="rounded-circle" width="150" height="150" style="object-fit: cover; border: 4px solid #ffffff;">
+    {% else %}
+      <img src="{% static 'app/default-company.png' %}" class="rounded-circle" width="150" height="150" style="object-fit: cover; border: 4px solid #ffffff;">
+    {% endif %}
+    <h4 class="mt-3 text-black">{{ company.company_name }}</h4>
+  </div>
+  
+
+    <h2 class="mb-4 text-center fw-bold text-dark"><i class="fas fa-user-edit me-2"></i>Post Jobs</h2>
+<form method="POST" enctype="multipart/form-data" action="{% url 'post_job' %}">
+  {% csrf_token %}
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="job_name" class="form-label text-dark">Job Title</label>
+      <input type="text" name="job_name" id="job_name" class="form-control rounded-5" value="{{ job.job_name|default:'' }}">
+    </div>
+    <div class="col-md-6">
+      <label for="company_name" class="form-label text-dark">Company Name</label>
+      <input type="text" name="company_name" id="company_name" class="form-control rounded-5" value="{{ company.company_name|default:'' }}"readonly>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="company_address" class="form-label text-dark">Company Address</label>
+    <textarea name="company_address" id="company_address" rows="2" class="form-control rounded-5">{{ company.address|default:'' }}</textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="job_description" class="form-label text-dark">Job Description</label>
+    <textarea name="job_description" id="job_description" rows="3" class="form-control rounded-5">{{ job.job_description|default:'' }}</textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="qualification" class="form-label text-dark">Qualification</label>
+    <input type="text" name="qualification" id="qualification" class="form-control rounded-5" value="{{ job.qualification|default:'' }}">
+  </div>
+
+  <div class="mb-3">
+    <label for="responsibilities" class="form-label text-dark">Responsibilities</label>
+    <textarea name="responsibilities" id="responsibilities" rows="3" class="form-control rounded-5">{{ job.responsibilities|default:'' }}</textarea>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="location" class="form-label text-dark">Location</label>
+      <input type="text" name="location" id="location" class="form-control rounded-5" value="{{ job.location|default:'' }}">
+    </div>
+    <div class="col-md-6">
+      <label for="experience" class="form-label text-dark">Experience</label>
+      <input type="text" name="experience" id="experience" class="form-control rounded-5" value="{{ job.experience|default:'' }}">
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="salary_package" class="form-label text-dark">Salary Package</label>
+      <input type="text" name="salary_package" id="salary_package" class="form-control rounded-5" value="{{ job.salary_package|default:'' }}">
+    </div>
+    <div class="col-md-6">
+      <label for="company_contact" class="form-label text-dark">Company Contact</label>
+      <input type="text" name="company_contact" id="company_contact" class="form-control rounded-5" value="{{ job.company_contact|default:'' }}">
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="company_email" class="form-label text-dark">Company Email</label>
+      <input type="email" name="company_email" id="company_email" class="form-control rounded-5" value="{{ job.company_email|default:'' }}">
+    </div>
+    <div class="col-md-6">
+      <label for="company_website" class="form-label text-dark">Company Website</label>
+      <input type="url" name="company_website" id="company_website" class="form-control rounded-5" value="{{ job.company_website|default:'' }}">
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button type="submit" class="btn btn-success px-5 rounded-5">Post Job</button>
+  </div>
+</form>
+
+
+  </div>
+</div>
+
+<!-- Styles -->
+<style>
+  .glass-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .form-control, .form-select {
+    background-color: rgba(255, 255, 255, 0.6);
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  .form-control:focus, .form-select:focus {
+    box-shadow: 0 0 10px #007bff;
+    border-color: #007bff;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;
+  }
+
+  label {
+    font-weight: 500;
+  }
+  
+  .custom-alert {
+    background-color: rgba(30, 30, 30, 0.85); /* dark background */
+    color: #f1f1f1;                           /* light text */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    padding: 15px 20px;
+    font-size: 16px;
+  }
+
+  .btn-close-white {
+    filter: brightness(0) invert(1); /* makes close button white */
+  }
+
+
+</style>
+{% endblock %}
+
