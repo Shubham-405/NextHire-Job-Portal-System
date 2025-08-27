@@ -129,68 +129,7 @@
         </select>
       </div>
 
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="profile_pic" class="form-label text-dark"><i class="fas fa-image me-1"></i>Upload Profile Picture</label>
-          <input type="file" name="profile_pic" id="profile_pic" class="form-control">
-          {% if candidate.profile_pic %}
-            <img src="{{ candidate.profile_pic.url }}" alt="Profile" class="img-thumbnail mt-2" width="120">
-          {% endif %}
-        </div>
-        <div class="col-md-6">
-          <label for="resume" class="form-label text-dark"><i class="fas fa-file-pdf me-1"></i>Upload Resume (PDF)</label>
-          <input type="file" name="resume" id="resume" class="form-control ">
-        </div>
-      </div>
-
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary px-5 rounded-5"><i class="fas fa-save me-2"></i>Update</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Styles -->
-<style>
-  .glass-box {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
-
-  .form-control, .form-select {
-    background-color: rgba(255, 255, 255, 0.6);
-    color: #000;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-  }
-
-  .form-control:focus, .form-select:focus {
-    box-shadow: 0 0 10px #007bff;
-    border-color: #007bff;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: #000;
-  }
-
-  label {
-    font-weight: 500;
-  }
-  
-  .custom-alert {
-    background-color: rgba(30, 30, 30, 0.85); /* dark background */
-    color: #f1f1f1;                           /* light text */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-    padding: 15px 20px;
-    font-size: 16px;
-  }
-
-  .btn-close-white {
-    filter: brightness(0) invert(1); /* makes close button white */
-  }
+ 
 
 
 </style>
