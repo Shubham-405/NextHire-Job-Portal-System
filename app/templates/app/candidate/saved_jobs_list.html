@@ -44,45 +44,4 @@
             <thead>
                 <tr>
                     <th>Sr.No</th>
-                    <th>Job Title</th>
-                    <th>Company</th>
-                    <th>Location</th>
-                    <th>Saved At</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for saved in saved_jobs %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ saved.job.job_title }}</td>
-                    <td>{{ saved.job.company.company_name }}</td>
-                    <td>{{ saved.job.location }}</td>
-                    <td>{{ saved.saved_at|date:"Y-m-d H:i" }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
-
-{% endblock %}
-
-{% block scripts %}
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-
-<script>
-$(document).ready(function () {
-    $('#savedJobsTable').DataTable({
-        pageLength: 5,
-        lengthChange: false,  // Hide "Show entries"
-        searching: true,      // Keep search bar
-        ordering: true,       // Enable sorting
-        language: {
-            search: "_INPUT_",
-            searchPlaceholder: "🔍 Search jobs..."
-        }
-    });
-});
-</script>
-{% endblock %}
+   
